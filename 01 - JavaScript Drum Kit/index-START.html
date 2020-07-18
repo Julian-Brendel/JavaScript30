@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+      window.addEventListener('keyup', (key) => {
+        const key_code = key.keyCode
+        console.log(`Pressed key ${key_code}`)
+
+        const [div_element, audio_element] = document.querySelectorAll(`[data-key='${key_code}']`)
+
+        audio_element.currentTime = 0
+        div_element.classList.add('playing')
+
+        audio_element.play()
+
+        setTimeout(() => {div_element.classList.remove('playing');}, 50)
+
+      })
+
+  </script>
 </head>
 <body>
 
