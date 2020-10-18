@@ -10,7 +10,7 @@
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
+        <div class="hand minute-hand"></div>
         <div class="hand second-hand"></div>
       </div>
     </div>
@@ -62,13 +62,31 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
     }
 
   </style>
 
   <script>
 
+    let hour_hand = document.querySelector('.hour-hand')
+    let minute_hand = document.querySelector('.minute-hand')
+    let second_hand = document.querySelector('.second-hand')
+
+    const setClock = () => {
+      let now = new Date();
+      hour_hand.style.transform = `rotate(${90 + 30 * now.getHours()}deg)`
+      minute_hand.style.transform = `rotate(${90 + 6 * now.getMinutes()}deg)`
+      second_hand.style.transform = `rotate(${90 + 6 * now.getSeconds()}deg)`
+    }
+
+    setClock();
+    setInterval(setClock, 1000);
+
+
+
 
   </script>
+
 </body>
 </html>
