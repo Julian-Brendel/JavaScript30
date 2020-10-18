@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scoped CSS Variables and JS</title>
+</head>
+<body>
+<h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+
+<div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px"
+           oninput="set_spacing(this.value)">
+
+    <label for="blur">Blur:</label>
+    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px"
+           oninput="set_blur(this.value)">
+
+    <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#ffc600" oninput="set_base_color(this.value)">
+</div>
+
+<img src="https://source.unsplash.com/7bwQXzbF6KE/800x500" id="image">
+
+<style>
+
+    /*
+      misc styles, nothing to do with CSS variables
+    */
+    :root {
+        --spacing: 10px;
+        --blur: 10px;
+        --base_color: #ffc600;
+    }
+
+    body {
+        text-align: center;
+        background: #193549;
+        color: white;
+        font-family: 'helvetica neue', sans-serif;
+        font-weight: 100;
+        font-size: 50px;
+    }
+
+    .controls {
+        margin-bottom: 50px;
+    }
+
+    input {
+        width: 100px;
+    }
+
+    .hl {
+        color: var(--base_color);
+    }
+
+    img {
+        padding: var(--spacing);
+        filter: blur(var(--blur));
+        background-color: var(--base_color);
+    }
+
+</style>
+
+<script>
+
+    const set_spacing = (spacing_amount) => {
+        document.documentElement.style.setProperty("--spacing", `${spacing_amount}px`)
+    }
+
+    const set_blur = (blur_amount) => {
+        document.documentElement.style.setProperty("--blur", `${blur_amount}px`)
+    }
+
+    const set_base_color = (base_color) => {
+        document.documentElement.style.setProperty("--base_color", base_color)
+    }
+
+
+</script>
+
+</body>
+</html>
